@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom/client"
-import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Board from "./pages/Board.jsx";
+import Rect from "./pages/Rect.jsx";
+
 
 
 function App() {
@@ -13,10 +14,11 @@ function App() {
   return (
     <>
     <Router>
-      <nav>
+      <nav >
         <ul>
           <li><Link to="/board">Board</Link></li>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/rect">Rectangular game</Link></li>
          
         </ul>
       </nav>
@@ -24,6 +26,8 @@ function App() {
       <Routes>
         <Route path="/board" element={<Board/>} />
         <Route path="/" element={<Home/>}/>
+        <Route path="/rect" element={<Rect/>}/>
+       
       </Routes>
     </Router>
     
