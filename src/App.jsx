@@ -3,6 +3,7 @@ import Board from "./pages/Board.jsx";
 import Rect from "./pages/Rect.jsx";
 import Circle from "./pages/Circle.jsx";
 import Gravity from "./pages/Gravity.jsx";
+import MouseEvent from "./pages/MouseEvent.jsx";
 
 function App() {
   const Home = () => <h1>home page</h1>;
@@ -27,6 +28,9 @@ function App() {
             <li>
               <Link to="/gravity">gravity</Link>
             </li>
+              <li>
+              <Link to="/event">Event</Link>
+            </li>
           </ul>
         </nav>
 
@@ -36,6 +40,7 @@ function App() {
           <Route path="/rect" element={<Rect />} />
           <Route path="/circle" element={<Circle />} />
           <Route path="/gravity" element={<Gravity />} />
+          <Route path="/event" element={<MouseEvent />} />
         </Routes>
       </Router>
     </>
