@@ -1,7 +1,9 @@
-import ReactDOM from "react-dom/client"
+
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Board from "./pages/Board.jsx";
 import Rect from "./pages/Rect.jsx";
+import Circle from "./pages/Circle.jsx";
+
 
 
 
@@ -19,6 +21,8 @@ function App() {
           <li><Link to="/board">Board</Link></li>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/rect">Rectangular game</Link></li>
+          <li><Link to="/circle">Circle</Link></li>
+           
          
         </ul>
       </nav>
@@ -27,6 +31,8 @@ function App() {
         <Route path="/board" element={<Board/>} />
         <Route path="/" element={<Home/>}/>
         <Route path="/rect" element={<Rect/>}/>
+        <Route path="/circle" element={<Circle/>}/>
+         
        
       </Routes>
     </Router>
