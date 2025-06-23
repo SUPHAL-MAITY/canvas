@@ -14,14 +14,17 @@ const Shapes = () => {
 
        const canvas=canvasRef.current;
        if(!canvas) return;
-       canvas.width=800;
-       canvas.height=500;
+       
+       canvas.height=window.innerHeight;
+       canvas.width=window.innerWidth;
         
        
        const ctx=canvas.getContext("2d")
        ctx.lineCap="round"
        ctx.lineJoin="round"
+       ctx.strokeStyle="white"
        ctxRef.current=ctx;
+       
 
 
     },[])
@@ -128,7 +131,11 @@ const Shapes = () => {
 
   return (
     <>
-    <canvas ref={canvasRef} style={{"border":"2px solid black"}}></canvas>
+    <canvas ref={canvasRef} style={{
+    
+       
+    backgroundColor:"black"
+  }}></canvas>
       
     </>
   )
