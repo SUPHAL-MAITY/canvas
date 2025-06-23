@@ -4,6 +4,7 @@ import Rect from "./pages/Rect.jsx";
 import Circle from "./pages/Circle.jsx";
 import Gravity from "./pages/Gravity.jsx";
 import MouseEvent from "./pages/MouseEvent.jsx";
+import Shapes from "./pages/Shapes.jsx";
 
 function App() {
   const Home = () => <h1>home page</h1>;
@@ -30,7 +31,10 @@ function App() {
             </li>
               <li>
               <Link to="/event">Event</Link>
-            </li>
+             </li>
+                  <li>
+              <Link to="/shapes">Shapes</Link>
+             </li>
           </ul>
         </nav>
 
@@ -41,6 +45,7 @@ function App() {
           <Route path="/circle" element={<Circle />} />
           <Route path="/gravity" element={<Gravity />} />
           <Route path="/event" element={<MouseEvent />} />
+          <Route path="/shapes" element={<Shapes />} />
         </Routes>
       </Router>
     </>
