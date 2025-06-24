@@ -1,7 +1,30 @@
+// type Shape={
+//   type : "rect";
+//   x: number; 
+//   y:   number;
+//   width: number;
+//   height:number ;
+
+// } | {
+//     type: "circle"; 
+//     centerX: number ;
+//     centerY: number ;
+//     radius: number ;
+
+// }
+
+
+
 export function initDraw(canvas, ctx) {
   let clicked = false;
   let startX = 0;
   let startY = 0;
+
+
+//   let existingShapes: Shape[]= [];
+
+  let existingShapes= [];
+
 
   if (!ctx) return;
 
@@ -19,6 +42,8 @@ export function initDraw(canvas, ctx) {
     startY = y;
   };
 
+
+
   const handleMouseMove = (e) => {
     const { x, y } = getMousePos(e);
     if (clicked) {
@@ -27,8 +52,8 @@ export function initDraw(canvas, ctx) {
 
       const width = x - startX;
       const height = y - startY;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0,0,canvas.width,canvas.height)
+      clearAndRender(existingShapes,canvas,ctx)
       ctx.strokeRect(startX, startY, width, height);
     }
   };
@@ -36,6 +61,19 @@ export function initDraw(canvas, ctx) {
   const handleMouseUp = (e) => {
     const { x, y } = getMousePos(e);
     clicked = false;
+
+    const width = x - startX;
+    const height = y - startY;
+
+    existingShapes.push({
+        type:"rect",
+        x:startX,
+        y:startY,
+        height,
+        width
+    })
+
+
     console.log("x while mouse up", x);
     console.log("y while mouse up", y);
     console.log("x while mouse up in event clientx", e.clientX);
@@ -59,6 +97,23 @@ export function initDraw(canvas, ctx) {
       y: event.clientY - rect.top,
     };
   }
+
+
+  function clearAndRender(existingShapes,canvas,ctx){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+
+    existingShapes.map((shape)=>{
+      if(shape.type==="rect"){
+        ctx.strokeStyle="rgba(255,255,255)"
+        ctx.strokeRect(shape.x,shape.y,shape.width,shape.height)
+      }
+    })
+
+  }
+
+  
+
 
   canvas.addEventListener("mousedown", handleMouseDown);
   canvas.addEventListener("mousemove", handleMouseMove);
