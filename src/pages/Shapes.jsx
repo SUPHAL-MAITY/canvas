@@ -9,10 +9,12 @@ const Shapes = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
     const ctx = canvas.getContext("2d");
+
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = "white";
