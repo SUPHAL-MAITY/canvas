@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { initDraw } from "../component/draw";
+import Topbar from "../component/Topbar";
 
 const Shapes = () => {
   const canvasRef = useRef(null);
@@ -28,6 +29,7 @@ const Shapes = () => {
 
   return (
     <>
+    <Topbar/>
       <canvas
         ref={canvasRef}
         style={{
