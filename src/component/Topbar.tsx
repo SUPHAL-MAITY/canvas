@@ -1,15 +1,32 @@
-import React from 'react'
+import { useState } from "react";
 
-const Topbar = () => {
+const Topbar = ({onSelectTool}) => {
+
+    const [activated,setActivated]=useState("rectangle")
+
+
+  const tools=[
+    { iconClass: "fas fa-minus fa-2x", name: "line" },
+    { iconClass: "fa-regular fa-square fa-2x", name: "rectangle" },
+    { iconClass: "fa-regular fa-circle fa-2x", name: "circle" },
+    { iconClass: "fas fa-diamond fa-2x", name: "diamond" },
+    { iconClass: "fas fa-pencil fa-2x", name: "pencil" },
+    { iconClass: "fa-solid fa-t fa-2x", name: "text" },
+  ];
+
+  const handleClick=(c:{iconClass:string, name: string})=>{
+    onSelectTool(c.iconClass)
+    setActivated(c.name)
+  }
+
   return (
-    <div style={{display:"flex",justifyContent:"space-around",gap:"16px",  marginTop:"10px",backgroundColor:"rgb(30, 29, 29)",width:"50%",height:"50px",borderRadius:"16px",position:"fixed",left:"50%",transform:"translateX(-50%)"}}>
+    <div style={{display:"flex",justifyContent:"space-around",alignItems:"center",gap:"16px",  marginTop:"10px",backgroundColor:"rgb(30, 29, 29)",width:"50%",height:"50px",borderRadius:"16px",position:"fixed",left:"50%",transform:"translateX(-50%)"}}>
       
-      <i className="fas fa-minus fa-2x" style={{ color: "white" }}></i>
-      <i className="fa-regular fa-square fa-2x" style={{color:"white"}}></i>
-      <i  className="fa-regular fa-circle fa-2x" style={{color:"white"}}></i>
-      <i  className="fas fa-diamond fa-2x" style={{color:"white"}}></i>
-      <i className="fas fa-pencil fa-2x" style={{color:"white"}}></i>
-      <i className="fa-solid fa-regular fa-t fa-2x" style={{color:"white"}}></i>
+      {tools.map((c)=>(
+        <i onClick={()=>handleClick(c)}   className={`${c.iconClass}`} style={{ color: activated=== c.name? "red" : "white" }}></i>
+      ))}
+
+
     </div>
   )
 }
