@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-const Topbar = ({onSelectTool}) => {
+const Topbar = ({ onSelectTool }) => {
+  const [activated, setActivated] = useState("rectangle");
 
-    const [activated,setActivated]=useState("rectangle")
-
-
-  const tools=[
+  const tools = [
     { iconClass: "fas fa-minus fa-2x", name: "line" },
     { iconClass: "fa-regular fa-square fa-2x", name: "rectangle" },
     { iconClass: "fa-regular fa-circle fa-2x", name: "circle" },
@@ -14,21 +12,37 @@ const Topbar = ({onSelectTool}) => {
     { iconClass: "fa-solid fa-t fa-2x", name: "text" },
   ];
 
-  const handleClick=(c:{iconClass:string, name: string})=>{
-    onSelectTool(c.iconClass)
-    setActivated(c.name)
-  }
+  const handleClick = (c: { iconClass: string; name: string }) => {
+    onSelectTool(c.iconClass);
+    setActivated(c.name);
+  };
 
   return (
-    <div style={{display:"flex",justifyContent:"space-around",alignItems:"center",gap:"16px",  marginTop:"10px",backgroundColor:"rgb(30, 29, 29)",width:"50%",height:"50px",borderRadius:"16px",position:"fixed",left:"50%",transform:"translateX(-50%)"}}>
-      
-      {tools.map((c)=>(
-        <i onClick={()=>handleClick(c)}   className={`${c.iconClass}`} style={{ color: activated=== c.name? "red" : "white" }}></i>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        alignItems: "center",
+        gap: "16px",
+        marginTop: "10px",
+        backgroundColor: "rgb(30, 29, 29)",
+        width: "50%",
+        height: "50px",
+        borderRadius: "16px",
+        position: "fixed",
+        left: "50%",
+        transform: "translateX(-50%)",
+      }}
+    >
+      {tools.map((c) => (
+        <i
+          onClick={() => handleClick(c)}
+          className={`${c.iconClass}`}
+          style={{ color: activated === c.name ? "red" : "white" }}
+        ></i>
       ))}
-
-
     </div>
-  )
-}
+  );
+};
 
-export default Topbar
+export default Topbar;

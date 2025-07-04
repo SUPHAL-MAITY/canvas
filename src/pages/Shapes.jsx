@@ -5,14 +5,12 @@ import Topbar from "../component/Topbar";
 const Shapes = () => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
-  const [selectedIcon, setSelctedIcon]=useState("rec")
-
+  const [selectedIcon, setSelctedIcon] = useState("rec");
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
@@ -29,14 +27,13 @@ const Shapes = () => {
     return cleanUp;
   }, []);
 
-
-  const handleSelectTool=(tool)=>{
-     setSelctedIcon(tool)
-  }
+  const handleSelectTool = (tool) => {
+    setSelctedIcon(tool);
+  };
 
   return (
     <>
-    <Topbar  onSelectTool={handleSelectTool}  />
+      <Topbar onSelectTool={handleSelectTool} />
       <canvas
         ref={canvasRef}
         style={{
