@@ -1,59 +1,44 @@
 // type Shape={
 //   type : "rect";
-//   x: number; 
+//   x: number;
 //   y:   number;
 //   width: number;
 //   height:number ;
 
 // } | {
-//     type: "circle"; 
+//     type: "circle";
 //     centerX: number ;
 //     centerY: number ;
 //     radius: number ;
 
 // }
 
-
-
-export function initDraw(canvas, ctx) {
+export function initDraw(canvas, ctx, selectedIcon) {
   let clicked = false;
   let startX = 0;
   let startY = 0;
 
+  //   let existingShapes: Shape[]= [];
 
-//   let existingShapes: Shape[]= [];
-
-  let existingShapes= [];
-
+  let existingShapes =    JSON.parse(localStorage.getItem("existingShapes")) || [] ;
+  
 
   if (!ctx) return;
 
   const handleMouseDown = (e) => {
     const { x, y } = getMousePos(e);
     clicked = true;
-
-    console.log("x while mouse down", x);
-    console.log("y while mouse down", y);
-
-    console.log("x while mouse down in event clientx", e.clientX);
-    console.log("y while mouse down in event clientx", e.clientY);
-
     startX = x;
     startY = y;
   };
 
-
-
   const handleMouseMove = (e) => {
     const { x, y } = getMousePos(e);
     if (clicked) {
-      console.log("x while mouse move", x);
-      console.log("y while mouse move", y);
-
       const width = x - startX;
       const height = y - startY;
-      ctx.fillRect(0,0,canvas.width,canvas.height)
-      clearAndRender(existingShapes,canvas,ctx)
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      clearAndRender(existingShapes, canvas, ctx);
       ctx.strokeRect(startX, startY, width, height);
     }
   };
@@ -64,29 +49,21 @@ export function initDraw(canvas, ctx) {
 
     const width = x - startX;
     const height = y - startY;
-
+    console.log(selectedIcon)
     existingShapes.push({
-        type:"rect",
-        x:startX,
-        y:startY,
-        height,
-        width
-    })
-
-
-    console.log("x while mouse up", x);
-    console.log("y while mouse up", y);
-    console.log("x while mouse up in event clientx", e.clientX);
-    console.log("y while mouse up in event clientx", e.clientY);
+      type: "rectangle",
+      x: startX,
+      y: startY,
+      height,
+      width,
+    });
+    console.log(existingShapes)
+    localStorage.setItem("existingShapes",JSON.stringify(existingShapes))
   };
 
   const handleMouseLeave = (e) => {
     const { x, y } = getMousePos(e);
     clicked = false;
-    console.log("x while mouse leave", x);
-    console.log("y while mouse leave", y);
-    console.log("x while mouse leave in event clientx", e.clientX);
-    console.log("y while mouse leave in event clientx", e.clientY);
   };
 
   function getMousePos(event) {
@@ -98,22 +75,16 @@ export function initDraw(canvas, ctx) {
     };
   }
 
+  function clearAndRender(existingShapes, canvas, ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  function clearAndRender(existingShapes,canvas,ctx){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height)
-
-    existingShapes.map((shape)=>{
-      if(shape.type==="rect"){
-        ctx.strokeStyle="rgba(255,255,255)"
-        ctx.strokeRect(shape.x,shape.y,shape.width,shape.height)
+    existingShapes.map((shape) => {
+      if (shape.type === "rectangle") {
+        ctx.strokeStyle = "rgba(255,255,255)";
+        ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
       }
-    })
-
+    });
   }
-
-  
-
 
   canvas.addEventListener("mousedown", handleMouseDown);
   canvas.addEventListener("mousemove", handleMouseMove);

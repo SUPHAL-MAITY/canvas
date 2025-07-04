@@ -10,11 +10,16 @@ const Topbar = ({ onSelectTool }) => {
     { iconClass: "fas fa-diamond fa-2x", name: "diamond" },
     { iconClass: "fas fa-pencil fa-2x", name: "pencil" },
     { iconClass: "fa-solid fa-t fa-2x", name: "text" },
+    { iconClass: "fas fa-eraser fa-2x", name: "eraser" },
   ];
 
   const handleClick = (c: { iconClass: string; name: string }) => {
-    onSelectTool(c.iconClass);
+    onSelectTool(c.name);
     setActivated(c.name);
+    if(c.name=="eraser"){
+        localStorage.removeItem("existingShapes")
+        window.location.reload()
+    }
   };
 
   return (
@@ -34,11 +39,12 @@ const Topbar = ({ onSelectTool }) => {
         transform: "translateX(-50%)",
       }}
     >
-      {tools.map((c) => (
+      {tools.map((c,i) => (
         <i
           onClick={() => handleClick(c)}
           className={`${c.iconClass}`}
           style={{ color: activated === c.name ? "red" : "white" }}
+          key={i}
         ></i>
       ))}
     </div>
