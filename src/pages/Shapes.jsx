@@ -7,6 +7,9 @@ const Shapes = () => {
   const ctxRef = useRef(null);
   const [selectedIcon, setSelctedIcon] = useState("rectangle");
 
+
+
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -21,17 +24,12 @@ const Shapes = () => {
     ctx.strokeStyle = "white";
 
     ctxRef.current = ctx;
-
-    
-
-    
   }, []);
 
-  useEffect(()=>{
-    const cleanUp = initDraw(canvasRef.current, ctxRef.current,selectedIcon);
+  useEffect(() => {
+    const cleanUp = initDraw(canvasRef.current, ctxRef.current, selectedIcon);
     return cleanUp;
-
-  },[selectedIcon])
+  }, [selectedIcon]);
 
   const handleSelectTool = (tool) => {
     setSelctedIcon(tool);

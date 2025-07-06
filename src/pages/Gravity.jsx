@@ -33,7 +33,7 @@ const Gravity = () => {
       ctx.arc(200, y, 20, 0, Math.PI * 2);
       ctx.fillStyle = "red";
       ctx.fill();
-      
+
       requestAnimationFrame(animate);
     }
 

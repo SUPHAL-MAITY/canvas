@@ -16,9 +16,9 @@ const Topbar = ({ onSelectTool }) => {
   const handleClick = (c: { iconClass: string; name: string }) => {
     onSelectTool(c.name);
     setActivated(c.name);
-    if(c.name=="eraser"){
-        localStorage.removeItem("existingShapes")
-        window.location.reload()
+    if (c.name == "eraser") {
+      localStorage.removeItem("existingShapes");
+      window.location.reload();
     }
   };
 
@@ -39,7 +39,7 @@ const Topbar = ({ onSelectTool }) => {
         transform: "translateX(-50%)",
       }}
     >
-      {tools.map((c,i) => (
+      {tools.map((c, i) => (
         <i
           onClick={() => handleClick(c)}
           className={`${c.iconClass}`}
