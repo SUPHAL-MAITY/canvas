@@ -1,6 +1,11 @@
 import { useRef, useEffect } from "react";
 
+
+
+
+
 const Rect = () => {
+
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -44,3 +49,7 @@ const Rect = () => {
 };
 
 export default Rect;
+
+
+
+

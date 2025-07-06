@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-const Circle = () => {
+const CircleMove = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -48,4 +48,4 @@ const Circle = () => {
   );
 };
 
-export default Circle;
+export default CircleMove;

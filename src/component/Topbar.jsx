@@ -13,7 +13,7 @@ const Topbar = ({ onSelectTool }) => {
     { iconClass: "fas fa-eraser fa-2x", name: "eraser" },
   ];
 
-  const handleClick = (c: { iconClass: string; name: string }) => {
+  const handleClick = (c) => {
     onSelectTool(c.name);
     setActivated(c.name);
     if (c.name == "eraser") {
@@ -50,5 +50,7 @@ const Topbar = ({ onSelectTool }) => {
     </div>
   );
 };
+
+
 
 export default Topbar;

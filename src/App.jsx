@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Board from "./pages/Board.jsx";
 import Rect from "./pages/Rect.jsx";
-import Circle from "./pages/Circle.jsx";
 import Gravity from "./pages/Gravity.jsx";
 import MouseEvent from "./pages/MouseEvent.jsx";
 import Shapes from "./pages/Shapes.jsx";
+import CircleMove from "./pages/CircleMove.jsx";
 
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
           <Route path="/board" element={<Board />} />
           <Route path="/" element={<Home />} />
           <Route path="/rect" element={<Rect />} />
-          <Route path="/circle" element={<Circle />} />
+          <Route path="/circle" element={<CircleMove/>} />
           <Route path="/gravity" element={<Gravity />} />
           <Route path="/event" element={<MouseEvent />} />
           <Route path="/shapes" element={<Shapes />} />
