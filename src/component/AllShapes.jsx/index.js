@@ -40,7 +40,8 @@ export default class AllShapes{
 
 
     drawDiamond(ctx){
-        ctx.beginPathctx.moveTo(this.normalizedX  + this.width/2 , this.normalizedY )  
+        ctx.beginPath()
+        ctx.moveTo(this.normalizedX  + this.width/2 , this.normalizedY )  
         ctx.lineTo(this.normalizedX   + this.width , this.normalizedY + this.height/2)
         ctx.lineTo(this.normalizedX  + this.width/2 , this.normalizedY + this.height)
         ctx.lineTo(this.normalizedX   , this.normalizedY + this.height/2)

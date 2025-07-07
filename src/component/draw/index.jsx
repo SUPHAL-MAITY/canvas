@@ -37,6 +37,7 @@ export default function initDraw(canvas, ctx, selectedIcon) {
          clearAndRender(existingShapes, canvas, ctx);
          shape.drawCircle(ctx);
     }else if(clicked && selectedIcon==="diamond"){
+         console.log("clicked")
          clearAndRender(existingShapes, canvas, ctx);
          console.log("in function",ctx)
          shape.drawDiamond(ctx)
@@ -53,7 +54,9 @@ export default function initDraw(canvas, ctx, selectedIcon) {
     clicked = false;
 
     const shape = new AllShapes(e, startX, startY, ctx);
-
+    
+    const currentX = e.offsetX;
+    const currentY = e.offsetY;
     const width = x - startX;
     const height = y - startY;
     
@@ -68,8 +71,7 @@ export default function initDraw(canvas, ctx, selectedIcon) {
       });
     } else if (selectedIcon === "circle") {
       // currentX,currentY,startX,startY
-      const currentX = e.offsetX;
-      const currentY = e.offsetY;
+     
       
 
       existingShapes.push({
@@ -79,6 +81,14 @@ export default function initDraw(canvas, ctx, selectedIcon) {
         startX,
         startY
       });
+    }else if(selectedIcon==="diamond"){
+      existingShapes.push({
+        type:"diamond",
+          currentX,
+          currentY,
+          startX,
+          startY
+      })
     }
 
     console.log(existingShapes);
@@ -101,20 +111,26 @@ export default function initDraw(canvas, ctx, selectedIcon) {
 
 
 
-  function clearAndRender(existingShapes, canvas, ctx,currentX,currentY,startX,startY) {
+  function clearAndRender(existingShapes, canvas, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+   
 
     existingShapes.map((shape) => {
+     const allShapes=new AllShapes(shape.currentX,shape.currentY,shape.startX,shape.startY)
+     
       if (shape.type === "rectangle") {
         ctx.strokeStyle = "rgba(255,255,255)";
         ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
-      } else if (shape.type === "circle") {
-        
-       const allShapes=new AllShapes(shape.currentX,shape.currentY,shape.startX,shape.startY)
+      } else if(shape.type === "circle") {     
        allShapes.drawCircle(ctx)
        
+      }else if(shape.type==="diamond"){
+        allShapes.drawDiamond(ctx)
       }
+
+
     });
+
   }
 
   canvas.addEventListener("mousedown", handleMouseDown);
