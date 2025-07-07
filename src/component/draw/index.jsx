@@ -1,6 +1,9 @@
 import AllShapes from "../AllShapes.jsx";
 
 export function initDraw(canvas, ctx, selectedIcon) {
+
+
+
   let clicked = false;
   let startX = 0;
   let startY = 0;
@@ -22,7 +25,9 @@ export function initDraw(canvas, ctx, selectedIcon) {
     const width = x - startX;
     const height = y - startY;
 
-    const shape = new AllShapes(e, startX, startY, ctx);
+
+    const shape = new AllShapes(e.offsetX,e.offsetY,startX,startY)
+
 
     if (clicked && selectedIcon === "rectangle") {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -30,10 +35,17 @@ export function initDraw(canvas, ctx, selectedIcon) {
       ctx.strokeRect(startX, startY, width, height);
     } else if (clicked && selectedIcon === "circle") {
       clearAndRender(existingShapes, canvas, ctx);
-
-      shape.drawCircle();
+      shape.drawCircle(ctx);
+    }else if(clicked && selectedIcon==="diamond"){
+          clearAndRender(existingShapes, canvas, ctx);
+          shape.drawDiamond(ctx)
     }
+
+
+
+
   };
+
 
   const handleMouseUp = (e) => {
     const { x, y } = getMousePos(e);
@@ -43,7 +55,8 @@ export function initDraw(canvas, ctx, selectedIcon) {
 
     const width = x - startX;
     const height = y - startY;
-    console.log(selectedIcon);
+    
+
     if (selectedIcon === "rectangle") {
       existingShapes.push({
         type: "rectangle",
@@ -53,17 +66,17 @@ export function initDraw(canvas, ctx, selectedIcon) {
         width,
       });
     } else if (selectedIcon === "circle") {
-      const centerX = shape.normalizedX + shape.width / 2;
-      const centerY = shape.normalizedY + shape.height / 2;
-      let widthCircle = shape.width / 2;
-      let heightCircle = shape.height / 2;
+      // currentX,currentY,startX,startY
+      const currentX = e.offsetX;
+      const currentY = e.offsetY;
+      
 
       existingShapes.push({
         type: "circle",
-        centerX,
-        centerY,
-        widthCircle,
-        heightCircle,
+        currentX,
+        currentY,
+        startX,
+        startY
       });
     }
 
@@ -85,7 +98,9 @@ export function initDraw(canvas, ctx, selectedIcon) {
     };
   }
 
-  function clearAndRender(existingShapes, canvas, ctx) {
+
+
+  function clearAndRender(existingShapes, canvas, ctx,currentX,currentY,startX,startY) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     existingShapes.map((shape) => {
@@ -93,18 +108,10 @@ export function initDraw(canvas, ctx, selectedIcon) {
         ctx.strokeStyle = "rgba(255,255,255)";
         ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
       } else if (shape.type === "circle") {
-        console.log("shape.centerX", shape.centerX);
-        ctx.beginPath();
-        ctx.ellipse(
-          shape.centerX,
-          shape.centerY,
-          shape.widthCircle,
-          shape.heightCircle,
-          0,
-          0,
-          2 * Math.PI
-        );
-        ctx.stroke();
+        
+       const allShapes=new AllShapes(shape.currentX,shape.currentY,shape.startX,shape.startY)
+       allShapes.drawCircle(ctx)
+       
       }
     });
   }

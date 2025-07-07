@@ -1,12 +1,14 @@
-// (e,startX,startY,ctx)
 
 
 export default class AllShapes{
 
-    
-    constructor(e,startX,startY,ctx){
-        this.currentX=e.offsetX;
-        this.currentY=e.offsetY;
+
+    constructor(currentX,currentY,startX,startY){
+        this.currentX=currentX;
+        this.currentY=currentY;
+
+        this.startX=startX;
+        this.startY=startY;
 
         this.normalizedX=Math.min(startX,this.currentX)
         this.normalizedY=Math.min(startY,this.currentY)
@@ -14,14 +16,14 @@ export default class AllShapes{
         this.width=Math.abs(this.currentX - startX)
         this.height=Math.abs(this.currentY - startY)
 
-        this.ctx=ctx;
+        
 
     }
 
 
-    drawCircle(){
-        this.ctx.beginPath();
-        this.ctx.ellipse(
+    drawCircle(ctx){
+        ctx.beginPath();
+        ctx.ellipse(
           this.normalizedX + this.width / 2, 
           this.normalizedY + this.height / 2,  
           this.width / 2,
@@ -30,11 +32,31 @@ export default class AllShapes{
           0, 
           2 * Math.PI 
         )
-        this.ctx.strokeStyle = "white"; 
-        this.ctx.lineWidth = 2;       
-        this.ctx.stroke();
+        ctx.strokeStyle = "white"; 
+        ctx.lineWidth = 2;       
+        ctx.stroke();
 
     }
+
+
+    drawDiamond(ctx){
+        ctx.beginPathctx.moveTo(this.normalizedX  + this.width/2 , this.normalizedY )  
+        ctx.lineTo(this.normalizedX   + this.width , this.normalizedY + this.height/2)
+        ctx.lineTo(this.normalizedX  + this.width/2 , this.normalizedY + this.height)
+        ctx.lineTo(this.normalizedX   , this.normalizedY + this.height/2)
+        ctx.closePath()
+        ctx.stroke()
+
+    }
+
+
+
+    static AllShapes(obj){
+        return new AllShapes(obj.currentX,obj.currentY,obj.startX,obj.startY)
+    }
+
+
+    
      
 
 
