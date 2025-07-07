@@ -41,6 +41,10 @@ export default function initDraw(canvas, ctx, selectedIcon) {
          clearAndRender(existingShapes, canvas, ctx);
          console.log("in function",ctx)
          shape.drawDiamond(ctx)
+    }else if(clicked && selectedIcon==="line"){
+         clearAndRender(existingShapes,canvas,ctx)
+         shape.drawLine(ctx);
+
     }
 
 
@@ -53,7 +57,7 @@ export default function initDraw(canvas, ctx, selectedIcon) {
     const { x, y } = getMousePos(e);
     clicked = false;
 
-    const shape = new AllShapes(e, startX, startY, ctx);
+    
     
     const currentX = e.offsetX;
     const currentY = e.offsetY;
@@ -70,9 +74,7 @@ export default function initDraw(canvas, ctx, selectedIcon) {
         width,
       });
     } else if (selectedIcon === "circle") {
-      // currentX,currentY,startX,startY
      
-      
 
       existingShapes.push({
         type: "circle",
@@ -88,6 +90,14 @@ export default function initDraw(canvas, ctx, selectedIcon) {
           currentY,
           startX,
           startY
+      })
+    }else if(selectedIcon==="line"){
+      existingShapes.push({
+        type:"line",
+        currentX,
+        currentY,
+        startX,
+        startY
       })
     }
 
@@ -117,7 +127,7 @@ export default function initDraw(canvas, ctx, selectedIcon) {
 
     existingShapes.map((shape) => {
      const allShapes=new AllShapes(shape.currentX,shape.currentY,shape.startX,shape.startY)
-     
+
       if (shape.type === "rectangle") {
         ctx.strokeStyle = "rgba(255,255,255)";
         ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
@@ -126,6 +136,8 @@ export default function initDraw(canvas, ctx, selectedIcon) {
        
       }else if(shape.type==="diamond"){
         allShapes.drawDiamond(ctx)
+      }else if(shape.type==="line"){
+        allShapes.drawLine(ctx)
       }
 
 

@@ -51,6 +51,12 @@ export default class AllShapes{
     }
 
 
+    drawLine(ctx){
+        ctx.beginPath()
+        ctx.moveTo(this.startX,this.startY)
+        ctx.lineTo(this.currentX, this.currentY)
+        ctx.stroke()
+    }
 
     static AllShapes(obj){
         return new AllShapes(obj.currentX,obj.currentY,obj.startX,obj.startY)
