@@ -1,6 +1,6 @@
 import AllShapes from "../AllShapes.jsx";
 
-export function initDraw(canvas, ctx, selectedIcon) {
+export default function initDraw(canvas, ctx, selectedIcon) {
 
 
 
@@ -30,15 +30,16 @@ export function initDraw(canvas, ctx, selectedIcon) {
 
 
     if (clicked && selectedIcon === "rectangle") {
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      clearAndRender(existingShapes, canvas, ctx);
-      ctx.strokeRect(startX, startY, width, height);
+         ctx.fillRect(0, 0, canvas.width, canvas.height);
+         clearAndRender(existingShapes, canvas, ctx);
+         ctx.strokeRect(startX, startY, width, height);
     } else if (clicked && selectedIcon === "circle") {
-      clearAndRender(existingShapes, canvas, ctx);
-      shape.drawCircle(ctx);
+         clearAndRender(existingShapes, canvas, ctx);
+         shape.drawCircle(ctx);
     }else if(clicked && selectedIcon==="diamond"){
-          clearAndRender(existingShapes, canvas, ctx);
-          shape.drawDiamond(ctx)
+         clearAndRender(existingShapes, canvas, ctx);
+         console.log("in function",ctx)
+         shape.drawDiamond(ctx)
     }
 
 

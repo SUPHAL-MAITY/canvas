@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { initDraw } from "../component/draw";
+
 import Topbar from "../component/Topbar";
+import  initDraw  from "../component/draw/index.jsx";
 
 
 const Shapes = () => {
